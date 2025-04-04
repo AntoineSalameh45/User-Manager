@@ -1,54 +1,76 @@
-# React + TypeScript + Vite
+# User Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, component-driven User Management interface built with React + TypeScript + TailwindCSS using Atomic Design principles.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Fully responsive layout
+- Reusable components with custom props
+- Theming support using CSS variables
+- Atomic Design folder structure
+- Data-driven rendering using JSON
+- Built with TypeScript for type safety
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tech Stack
+
+- **React** (with Vite)
+- **TypeScript**
+- **TailwindCSS**
+- **Material UI (MUI)** – for theme icons
+- **Atomic Design Architecture**
+
+---
+
+## Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/AntoineSalameh45/User-Manager.git
+cd User-Manager
+
+# Install dependencies
+yarn install
+
+# Start development server
+yarn run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Setup Required Data File
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
+For security and privacy reasons, the user data JSON file is not included in the repository.
+After cloning the project:
+
+Navigate to the data/ directory.
+
+Create a new file named UserData.json.
+
+Structure your JSON like this:
+
+```bash
+[
+  {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "status": "active",
+    "dateOfBirth": "1990-01-01"
   },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+  {
+    "name": "Jane Smith",
+    "email": "jane@example.com",
+    "status": "inactive",
+    "dateOfBirth": "1985-12-10"
+  }
+]
 ```
+
+---
+
+👤 Author
+Made with ❤️ by Antoine Salameh
+Powered by XXL Zero Sugar, TypeScript, and pure frontend magic.
