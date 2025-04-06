@@ -1,0 +1,63 @@
+[
+    {
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "status": "active",
+      "dateOfBirth": "1990-05-15"
+    },
+    {
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "status": "locked",
+      "dateOfBirth": "1988-10-22"
+    },
+    {
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "status": "active",
+      "dateOfBirth": "1995-02-10"
+    },
+    {
+      "name": "Bob",
+      "email": "bob.martin@example.com",
+      "status": "locked",
+      "dateOfBirth": "1980-08-05"
+    },
+    {
+      "name": "Charlie Brown",
+      "email": "charlie.brown@example.com",
+      "status": "active",
+      "dateOfBirth": "1992-11-30"
+    },
+    {
+      "name": "David Lee",
+      "email": "david.lee@example.com",
+      "status": "locked",
+      "dateOfBirth": "1987-07-14"
+    },
+    {
+      "name": "Eve",
+      "email": "eve.green@example.com",
+      "status": "active",
+      "dateOfBirth": "1993-09-21"
+    },
+    {
+      "name": "Frank White",
+      "email": "frank.white@example.com",
+      "status": "active",
+      "dateOfBirth": "1994-01-25"
+    },
+    {
+      "name": "Grace Black",
+      "email": "grace.black@example.com",
+      "status": "locked",
+      "dateOfBirth": "1985-03-17"
+    },
+    {
+      "name": "Hannah",
+      "email": "hannah.purple@example.com",
+      "status": "active",
+      "dateOfBirth": "1996-12-03"
+    }
+  ]
+  
