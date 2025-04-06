@@ -1,6 +1,7 @@
 import SearchUser from './components/molecules/SearchUser'
 import Navbar from './components/organisims/Navbar'
-import UserList from './components/organisims/UserList'
+// import UserList from './components/organisims/UserList'
+import StaticUserList from './components/organisims/StaticUserList'
 
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
       <div className='p-4'>
         <SearchUser />
         <div>
-          <UserList />
+          {/* <UserList /> */}
+          <StaticUserList />
         </div>
       </div>
     </>
