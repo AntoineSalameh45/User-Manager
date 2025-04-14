@@ -1,10 +1,10 @@
 import React, { Suspense, useMemo } from "react";
-
 import {
   Route,
   createBrowserRouter,
   RouterProvider,
   createRoutesFromElements,
+  Navigate,
 } from "react-router";
 
 import { routeNames } from "./routeNames";
@@ -33,28 +33,42 @@ const Routes = () => {
     return createBrowserRouter(
       createRoutesFromElements(
         <Route errorElement={<></>}>
-          <Route 
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Navigate to={routeNames.dashboard} replace />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path={routeNames.login}
             element={
-                <AuthenticationRoute>
-                    <Login />
-                </AuthenticationRoute>
-            } />
+              <AuthenticationRoute>
+                <Login />
+              </AuthenticationRoute>
+            }
+          />
+
           <Route
             path={routeNames.dashboard}
             element={
-                <ProtectedRoute>
-                    <Navbar />
-                    <Dashboard />
-                </ProtectedRoute>
-            } />
-            <Route
+              <ProtectedRoute>
+                <Navbar />
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path={routeNames.pagenotfound}
             element={
-                <ProtectedRoute>
-                    <PageNotFound />
-                </ProtectedRoute>
-            } />
+              <ProtectedRoute>
+                <PageNotFound />
+              </ProtectedRoute>
+            }
+          />
         </Route>
       )
     );

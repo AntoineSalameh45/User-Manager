@@ -4,7 +4,7 @@ const PageNotFound = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1);
+    navigate("/dashboard");
   };
 
   return (
