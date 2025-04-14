@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #3251D0;
+  --color-secondary: #263D9C;
+  --color-pagebg: #f3f4f6;
+  --color-bg: #ffffff;
+  --color-cardbg: #ffffff;
+  --color-info: #4a5565;
+  --color-btn: #3251D0;
+  --color-insidetxt: #ffffff;
+  --color-pagebg: #f3f4f6;
+  --color-txt: #000000;
+  --text-color: #000000;
+}
+
+.dark-theme {
+  --color-primary: #263D9C;
+  --color-secondary: #3251D0;
+  --color-pagebg: #131e53;
+  --color-bg: #263D9C;
+  --color-cardbg: #3251D0;
+  --color-info: #e4e4e4;
+  --color-btn: #ffffff;
+  --color-insidetxt: #263D9C;
+  --color-txt: #ffffff;
+  --text-color: #ffffff;
+}
+
+body {
+  @apply bg-[var(--color-pagebg)];
+}
+
+.info {
+  @apply text-info text-sm;
+}
+
+.hover-shadow-glow {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-shadow-glow:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(50, 81, 208, 0.6);
+}
