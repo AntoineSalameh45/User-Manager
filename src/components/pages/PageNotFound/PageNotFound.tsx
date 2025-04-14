@@ -19,7 +19,7 @@ const PageNotFound = () => {
           onClick={handleGoBack}
           className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-secondary hover:border-secondary transition duration-300"
         >
-          Go Back
+          Go to Dashboard
         </button>
       </div>
     </div>

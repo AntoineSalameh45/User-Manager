@@ -10,7 +10,7 @@ import {
 import { routeNames } from "./routeNames";
 import { ProtectedRoute } from "./ProtectedRoutes";
 import { AuthenticationRoute } from "./AuthenticationRoutes";
-import { Navbar } from "../components/organisims/Navbar";
+import { SharedLayout } from "../Layout/SharedLayout";
 
 const Login = React.lazy(() =>
   import("../components/pages/Login").then((module) => ({
@@ -52,23 +52,15 @@ const Routes = () => {
           />
 
           <Route
-            path={routeNames.dashboard}
             element={
               <ProtectedRoute>
-                <Navbar />
-                <Dashboard />
+                <SharedLayout />
               </ProtectedRoute>
             }
-          />
-
-          <Route
-            path={routeNames.pagenotfound}
-            element={
-              <ProtectedRoute>
-                <PageNotFound />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route path={routeNames.dashboard} element={<Dashboard />} />
+            <Route path={routeNames.pagenotfound} element={<PageNotFound />} />
+          </Route>
         </Route>
       )
     );
