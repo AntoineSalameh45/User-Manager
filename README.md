@@ -12,6 +12,11 @@ A responsive, component-driven User Management interface built with React + Type
 - Atomic Design folder structure
 - Data-driven rendering using JSON
 - Built with TypeScript for type safety
+- Login form with authentication (protected routes)
+- Persistent login state until logout
+- Theme switching (light and dark modes)
+- Fetch users from a mock API
+- Search users by first name, last name, or email
 
 ---
 
@@ -22,6 +27,7 @@ A responsive, component-driven User Management interface built with React + Type
 - **TailwindCSS**
 - **Material UI (MUI)** – for theme icons
 - **Atomic Design Architecture**
+- **Zustand** - for global state management
 
 ---
 
@@ -33,41 +39,14 @@ git clone https://github.com/AntoineSalameh45/User-Manager.git
 cd User-Manager
 
 # Install dependencies
-yarn install
+npm install
 
 # Start development server
-yarn run dev
+npm run dev
 ```
 
 ---
 
-## Setup Required Data File
-
-For security and privacy reasons, the user data JSON file is not included in the repository.
-After cloning the project:
-
-Navigate to the data/ directory.
-
-Create a new file named UserData.json.
-
-Structure your JSON like this:
-
-```bash
-[
-  {
-    "name": "John Doe",
-    "email": "john@example.com",
-    "status": "active",
-    "dateOfBirth": "1990-01-01"
-  },
-  {
-    "name": "Jane Smith",
-    "email": "jane@example.com",
-    "status": "inactive",
-    "dateOfBirth": "1985-12-10"
-  }
-]
-```
 
 ---
 
