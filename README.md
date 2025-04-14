@@ -48,8 +48,6 @@ npm run dev
 ---
 
 
----
-
 👤 Author
 Made with ❤️ by Antoine Salameh
 Powered by XXL Zero Sugar, TypeScript, and pure frontend magic.
