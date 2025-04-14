@@ -1,22 +1,22 @@
-import SearchUser from './components/molecules/SearchUser'
-import Navbar from './components/organisims/Navbar'
-// import UserList from './components/organisims/UserList'
-import StaticUserList from './components/organisims/StaticUserList'
+import { useEffect } from "react";
+import useThemeStore from "./store/themeStore";
+import { Routes } from "./routes";
 
 function App() {
+  const { isDarkMode } = useThemeStore();
+
+  useEffect(() => {
+    const body = document.body;
+    if (isDarkMode) {
+      body.classList.add("dark-theme");
+    } else {
+      body.classList.remove("dark-theme");
+    }
+  }, [isDarkMode]);
 
   return (
-    <>
-      <Navbar />
-      <div className='p-4'>
-        <SearchUser />
-        <div>
-          {/* <UserList /> */}
-          <StaticUserList />
-        </div>
-      </div>
-    </>
-  )
+    <Routes />
+  );
 }
 
-export default App
+export default App;
