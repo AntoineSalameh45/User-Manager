@@ -27,6 +27,11 @@ const PageNotFound = React.lazy(() =>
     default: module.PageNotFound,
   }))
 );
+const CreateUser = React.lazy(() =>
+  import("../components/pages/NewUser").then((module) => ({
+    default: module.NewUser,
+  }))
+);
 
 const Routes = () => {
   const router = useMemo(() => {
@@ -59,6 +64,7 @@ const Routes = () => {
             }
           >
             <Route path={routeNames.dashboard} element={<Dashboard />} />
+            <Route path={routeNames.newuser} element={<CreateUser />} />
             <Route path={routeNames.pagenotfound} element={<PageNotFound />} />
           </Route>
         </Route>
