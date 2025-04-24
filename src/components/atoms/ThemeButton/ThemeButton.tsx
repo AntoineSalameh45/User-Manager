@@ -7,7 +7,7 @@ const ThemeButton = () => {
 
   return (
     <button
-      className="p-2 rounded-full bg-primary-dark text-white cursor-pointer transition-all duration-300"
+      className="p-2 rounded-full bg-primary text-white cursor-pointer transition-all duration-300"
       onClick={toggleTheme}
     >
       {isDarkMode ? <LightModeOutlinedIcon /> : <DarkModeOutlinedIcon />}
