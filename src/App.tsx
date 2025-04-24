@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import useThemeStore from "./store/themeStore";
 import { Routes } from "./routes";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   const { isDarkMode } = useThemeStore();
@@ -15,7 +19,11 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <Routes />
+    <>
+      <QueryClientProvider client={queryClient}>
+        <Routes />
+      </QueryClientProvider>
+    </>
   );
 }
 
