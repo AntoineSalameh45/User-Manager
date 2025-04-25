@@ -52,7 +52,11 @@ const CreateUser = () => {
     },
     onSuccess: () => {
       toast.success("User created successfully!");
-      navigate("/dashboard");
+
+      // Delay navigation to dashboard for a short time after showing the toast
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000); // Navigate after 2 seconds
     },
     onError: (error: Error) => {
       toast.error(error.message || "Something went wrong");
@@ -115,13 +119,13 @@ const CreateUser = () => {
             </select>
             {errors.status && <p className="text-sm text-red-500">{errors.status.message}</p>}
           </div>
-            <button
-                type="submit"
-                className="w-auto py-2 px-4 bg-btn text-insidetxt rounded"
-                disabled={mutation.status === 'pending'}
-                >
-                {mutation.status === 'pending' ? "Submitting..." : "Submit"}
-            </button>
+          <button
+            type="submit"
+            className="w-auto py-2 px-4 bg-btn text-insidetxt rounded"
+            disabled={mutation.status === "pending"}
+          >
+            {mutation.status === "pending" ? "Submitting..." : "Submit"}
+          </button>
         </form>
       </div>
     </div>

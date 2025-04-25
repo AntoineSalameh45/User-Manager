@@ -8,6 +8,7 @@ import { useParams, useNavigate } from "react-router";
 import useSessionStore from "../../../store/authStore";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { Spinner } from "../../atoms/Spinner";
 
 const userSchema = z.object({
   firstName: z.string().nonempty("First Name is required"),
@@ -34,8 +35,8 @@ const EditUser = () => {
   const token = useSessionStore((state) => state.accessToken);
   const navigate = useNavigate();
 
-  const { data: userData, isLoading } = useQuery({
-    queryKey: ["user", id],
+  const { data: userData, isLoading, isError } = useQuery<UserFormValues>({
+    queryKey: ["user", id], // Query key
     queryFn: async () => {
       const response = await fetch(`/api/users/${id}`, {
         headers: {
@@ -48,20 +49,20 @@ const EditUser = () => {
         throw new Error("Failed to fetch user data");
       }
 
-      return response.json() as Promise<UserFormValues>;
+      return response.json();
     },
     enabled: !!id,
   });
 
   useEffect(() => {
     if (userData) {
+      // Ensure setValue is only called once after userData is available
       Object.entries(userData).forEach(([key, value]) => {
         setValue(key as keyof UserFormValues, value);
       });
     }
   }, [userData, setValue]);
 
-  // Update user
   const mutation = useMutation({
     mutationFn: async (updatedUser: UserFormValues) => {
       const response = await fetch(`/api/users/${id}`, {
@@ -72,29 +73,40 @@ const EditUser = () => {
         },
         body: JSON.stringify(updatedUser),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Failed to update user");
       }
-
+  
       return response.json();
     },
     onSuccess: () => {
       toast.success("User updated successfully!");
-      navigate("/dashboard");
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 2000);
     },
     onError: (error: Error) => {
       toast.error(error.message || "Something went wrong");
     },
   });
+  
 
   const onSubmit = (data: UserFormValues) => {
     mutation.mutate(data);
   };
 
   if (isLoading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Spinner />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return <div className="text-center mt-10">Error loading user data</div>;
   }
 
   return (
