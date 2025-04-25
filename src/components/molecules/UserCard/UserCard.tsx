@@ -1,5 +1,6 @@
 import { CustomButton } from "../../atoms/CustomButton";
 import { iUserCardProps } from "./UserCard.type";
+import { useNavigate } from "react-router";
 
 const getInitials = (firstName: string, lastName?: string) => {
   const initials = [];
@@ -8,7 +9,13 @@ const getInitials = (firstName: string, lastName?: string) => {
   return initials.join("").toUpperCase();
 };
 
-const UserCard = ({ firstName, lastName, email, status, dateOfBirth }: iUserCardProps) => {
+const UserCard = ({ id, firstName, lastName, email, status, dateOfBirth }: iUserCardProps) => {
+  const navigate = useNavigate();
+
+  const handleEditClick = () => {
+    navigate(`/dashboard/edit/${id}`);
+  };
+
   return (
     <div className="bg-cardbg shadow-lg rounded-xl p-5 w-full flex flex-col hover-shadow-glow">
       <div className="w-16 h-16 bg-primary border border-white text-white text-xl font-bold flex items-center justify-center place-self-center rounded-full">
@@ -29,6 +36,7 @@ const UserCard = ({ firstName, lastName, email, status, dateOfBirth }: iUserCard
           bgColor="bg-primary"
           textColor="text-white"
           hoverBgColor="hover:bg-secondary border border-transparent hover:border-btn"
+          onClick={handleEditClick}
         />
         <CustomButton
           text="Delete"

@@ -3,6 +3,7 @@ const routeNames = {
     dashboard: "/dashboard",
     pagenotfound: "*",
     newuser: "/dashboard/new",
+    edituser: "/dashboard/edit/:id",
   };
   
   export { routeNames };

@@ -32,6 +32,11 @@ const CreateUser = React.lazy(() =>
     default: module.NewUser,
   }))
 );
+const EditUser = React.lazy(() =>
+  import("../components/pages/Edit").then((module) => ({
+    default: module.EditUserPage,
+  }))
+);
 
 const Routes = () => {
   const router = useMemo(() => {
@@ -65,6 +70,7 @@ const Routes = () => {
           >
             <Route path={routeNames.dashboard} element={<Dashboard />} />
             <Route path={routeNames.newuser} element={<CreateUser />} />
+            <Route path={routeNames.edituser} element={<EditUser />} />
             <Route path={routeNames.pagenotfound} element={<PageNotFound />} />
           </Route>
         </Route>
