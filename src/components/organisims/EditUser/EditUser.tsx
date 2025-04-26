@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../../atoms/InputFields";
 import { UserStatus } from "../../../../mock/mock.type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams, useNavigate } from "react-router";
@@ -9,6 +8,8 @@ import useSessionStore from "../../../store/authStore";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { Spinner } from "../../atoms/Spinner";
+import UserFormFields from "../../molecules/UserFormFields/UserFormFields";
+import { iUserFormValues } from "../../molecules/UserFormFields/UserFormFields.type";
 
 const userSchema = z.object({
   firstName: z.string().nonempty("First Name is required"),
@@ -24,19 +25,17 @@ const userSchema = z.object({
   status: z.nativeEnum(UserStatus, { errorMap: () => ({ message: "Status is required" }) }),
 });
 
-type UserFormValues = z.infer<typeof userSchema>;
-
 const EditUser = () => {
   const { id } = useParams<{ id: string }>();
-  const { register, handleSubmit, setValue, formState: { errors } } = useForm<UserFormValues>({
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<iUserFormValues>({
     resolver: zodResolver(userSchema),
   });
 
   const token = useSessionStore((state) => state.accessToken);
   const navigate = useNavigate();
 
-  const { data: userData, isLoading, isError } = useQuery<UserFormValues>({
-    queryKey: ["user", id], // Query key
+  const { data: userData, isLoading, isError } = useQuery<iUserFormValues>({
+    queryKey: ["user", id],
     queryFn: async () => {
       const response = await fetch(`/api/users/${id}`, {
         headers: {
@@ -56,15 +55,14 @@ const EditUser = () => {
 
   useEffect(() => {
     if (userData) {
-      // Ensure setValue is only called once after userData is available
       Object.entries(userData).forEach(([key, value]) => {
-        setValue(key as keyof UserFormValues, value);
+        setValue(key as keyof iUserFormValues, value);
       });
     }
   }, [userData, setValue]);
 
   const mutation = useMutation({
-    mutationFn: async (updatedUser: UserFormValues) => {
+    mutationFn: async (updatedUser: iUserFormValues) => {
       const response = await fetch(`/api/users/${id}`, {
         method: "PUT",
         headers: {
@@ -93,7 +91,7 @@ const EditUser = () => {
   });
   
 
-  const onSubmit = (data: UserFormValues) => {
+  const onSubmit = (data: iUserFormValues) => {
     mutation.mutate(data);
   };
 
@@ -117,56 +115,10 @@ const EditUser = () => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-center mt-10 space-y-6"
         >
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="First Name"
-              name="firstName"
-              register={register}
-              error={errors.firstName?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Last Name (optional)"
-              name="lastName"
-              register={register}
-              error={errors.lastName?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Email"
-              name="email"
-              register={register}
-              error={errors.email?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Date of Birth"
-              name="dateOfBirth"
-              type="date"
-              register={register}
-              error={errors.dateOfBirth?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <label className="text-sm font-medium mb-1">Status</label>
-            <select
-              {...register("status")}
-              className="border bg-pagebg border-gray-300 p-2 rounded focus:outline-primary"
-            >
-              {Object.values(UserStatus).map((status) => (
-                <option key={status} value={status}>
-                  {status.charAt(0).toUpperCase() + status.slice(1)}
-                </option>
-              ))}
-            </select>
-            {errors.status && <p className="text-sm text-red-500">{errors.status.message}</p>}
-          </div>
+          <UserFormFields register={register} errors={errors} />
           <button
             type="submit"
-            className="w-auto py-2 px-4 bg-btn text-insidetxt rounded"
+            className="w-auto py-2 px-4 bg-btn dark:bg-btn-dark text-insidetxt rounded"
             disabled={mutation.status === "pending"}
           >
             {mutation.status === "pending" ? "Saving..." : "Save Changes"}

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../../atoms/InputFields";
+import { InputField } from "../../atoms/InputField";
 import { UserStatus } from "../../../../mock/mock.type";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";

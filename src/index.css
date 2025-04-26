@@ -1,38 +1,55 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+
   --color-primary: #3251D0;
-  --color-secondary: #263D9C;
+  --color-primary-dark: #263D9C;
+
   --color-pagebg: #f3f4f6;
+  --color-pagebg-dark: #131e53;
   --color-bg: #ffffff;
+
   --color-cardbg: #ffffff;
+
   --color-info: #4a5565;
+  --color-info-dark: #e4e4e4;
+  
   --color-btn: #3251D0;
+  --color-btn-dark: #263D9C;
+
   --color-insidetxt: #ffffff;
+  --color-insidetxt-dark: #263D9C;
+
   --color-pagebg: #f3f4f6;
+  --color-pagebg-dark: #131e53;
+
   --color-txt: #000000;
+  --color-txt-dark: #ffffff;
+
   --text-color: #000000;
+  --text-color-dark: #ffffff;
+
 }
 
-.dark-theme {
-  --color-primary: #263D9C;
+/* .dark-theme {
+  --color-primary-dark: #263D9C;
   --color-secondary: #3251D0;
   --color-pagebg: #131e53;
   --color-bg: #263D9C;
   --color-cardbg: #3251D0;
-  --color-info: #e4e4e4;
   --color-btn: #ffffff;
   --color-insidetxt: #263D9C;
   --color-txt: #ffffff;
   --text-color: #ffffff;
-}
+} */
 
 body {
-  @apply bg-[var(--color-pagebg)];
+  @apply bg-[var(--color-pagebg)] dark:bg-[var(--color-pagebg-dark)];
 }
 
 .info {
-  @apply text-info text-sm;
+  @apply text-info dark:text-info-dark text-sm;
 }
 
 .hover-shadow-glow {

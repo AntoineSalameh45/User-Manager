@@ -11,14 +11,9 @@ function App() {
   const { isDarkMode } = useThemeStore();
 
   useEffect(() => {
-    const body = document.body;
-    if (isDarkMode) {
-      body.classList.add("dark-theme");
-    } else {
-      body.classList.remove("dark-theme");
-    }
+    document.documentElement.classList.toggle('dark', isDarkMode);
   }, [isDarkMode]);
-
+  
   return (
     <>
       <QueryClientProvider client={queryClient}>

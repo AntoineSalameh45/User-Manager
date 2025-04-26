@@ -17,7 +17,7 @@ const getInitials = (firstName: string, lastName?: string) => {
 const UserCard = memo(({ id, firstName, lastName, email, status, dateOfBirth }: iUserCardProps) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const accessToken = useSessionStore((state) => state.accessToken); // Retrieve access token
+  const accessToken = useSessionStore((state) => state.accessToken);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const mutation = useMutation({
@@ -26,7 +26,7 @@ const UserCard = memo(({ id, firstName, lastName, email, status, dateOfBirth }: 
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`, // Add token here
+          Authorization: `Bearer ${accessToken}`,
         },
       });
 
@@ -63,12 +63,12 @@ const UserCard = memo(({ id, firstName, lastName, email, status, dateOfBirth }: 
   };
 
   return (
-    <div className="bg-cardbg shadow-lg rounded-xl p-5 w-full flex flex-col hover-shadow-glow">
+    <div className="bg-cardbg dark:bg-primary shadow-lg rounded-xl p-5 w-full flex flex-col hover-shadow-glow">
       <div className="w-16 h-16 bg-primary border border-white text-white text-xl font-bold flex items-center justify-center place-self-center rounded-full">
         {getInitials(firstName, lastName)}
       </div>
       <div>
-        <h3 className="mt-3 font-semibold text-lg text-txt">
+        <h3 className="mt-3 font-semibold text-lg text-txt dark:text-txt-dark">
           {firstName} {lastName || ""}
         </h3>
         <p className="info">Email: {email}</p>
