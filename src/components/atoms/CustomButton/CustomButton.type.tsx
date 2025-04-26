@@ -4,5 +4,6 @@ export interface iCustomButtonProps {
     textColor?: string;
     hoverBgColor?: string;
     onClick?: () => void;
+    disabled?: boolean;
   }
   

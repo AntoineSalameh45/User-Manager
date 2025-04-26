@@ -1,6 +1,11 @@
-import { CustomButton } from "../../atoms/CustomButton";
-import { iUserCardProps } from "./UserCard.type";
+import { memo, useState } from "react";
 import { useNavigate } from "react-router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+import useSessionStore from "../../../store/authStore"; // Import session store
+import { CustomButton } from "../../atoms/CustomButton";
+import { ConfirmationModal } from "../ConfirmationModal";
+import { iUserCardProps } from "./UserCard.type";
 
 const getInitials = (firstName: string, lastName?: string) => {
   const initials = [];
@@ -9,11 +14,52 @@ const getInitials = (firstName: string, lastName?: string) => {
   return initials.join("").toUpperCase();
 };
 
-const UserCard = ({ id, firstName, lastName, email, status, dateOfBirth }: iUserCardProps) => {
+const UserCard = memo(({ id, firstName, lastName, email, status, dateOfBirth }: iUserCardProps) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const accessToken = useSessionStore((state) => state.accessToken); // Retrieve access token
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const response = await fetch(`/api/users/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`, // Add token here
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Delete error:", errorData);
+        throw new Error(errorData.message || "Failed to delete user");
+      }
+    },
+    onSuccess: () => {
+      toast.success("User deleted successfully!");
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || "Failed to delete user");
+    },
+  });
 
   const handleEditClick = () => {
     navigate(`/dashboard/edit/${id}`);
+  };
+
+  const handleDeleteClick = () => {
+    setModalOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    mutation.mutate();
+  };
+
+  const cancelDelete = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -43,10 +89,19 @@ const UserCard = ({ id, firstName, lastName, email, status, dateOfBirth }: iUser
           bgColor="bg-red-500"
           textColor="text-white"
           hoverBgColor="hover:bg-red-700 border border-transparent hover:border-btn"
+          onClick={handleDeleteClick}
         />
       </div>
+
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onCancel={cancelDelete}
+        title="Delete User"
+        description={`Are you sure you want to delete ${firstName} ${lastName || ""}?`}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
-};
+});
 
 export default UserCard;
