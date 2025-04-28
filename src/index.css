@@ -8,9 +8,9 @@
 
   --color-pagebg: #f3f4f6;
   --color-pagebg-dark: #131e53;
-  --color-bg: #ffffff;
 
   --color-cardbg: #ffffff;
+  --color-cardbg-dark: #263D9C;
 
   --color-info: #4a5565;
   --color-info-dark: #e4e4e4;
@@ -23,6 +23,7 @@
 
   --color-pagebg: #f3f4f6;
   --color-pagebg-dark: #131e53;
+  --color-pagebg-dark66: #131e5366;
 
   --color-txt: #000000;
   --color-txt-dark: #ffffff;
@@ -44,9 +45,6 @@
   --text-color: #ffffff;
 } */
 
-body {
-  @apply bg-[var(--color-pagebg)] dark:bg-[var(--color-pagebg-dark)];
-}
 
 .info {
   @apply text-info dark:text-info-dark text-sm;

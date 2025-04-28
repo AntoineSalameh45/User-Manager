@@ -81,14 +81,14 @@ const UserCard = memo(({ id, firstName, lastName, email, status, dateOfBirth }: 
           text="Edit"
           bgColor="bg-primary"
           textColor="text-white"
-          hoverBgColor="hover:bg-secondary border border-transparent hover:border-btn"
+          hoverBgColor="hover:bg-primary-dark border border-transparent hover:border-btn"
           onClick={handleEditClick}
         />
         <CustomButton
           text="Delete"
           bgColor="bg-red-500"
           textColor="text-white"
-          hoverBgColor="hover:bg-red-700 border border-transparent hover:border-btn"
+          hoverBgColor="hover:bg-red-700 border border-transparent dark:hover:border-white"
           onClick={handleDeleteClick}
         />
       </div>

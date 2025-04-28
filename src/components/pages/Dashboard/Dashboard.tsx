@@ -10,7 +10,6 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const accessToken = useSessionStore((state) => state.accessToken);
 
-  // Debounce the search query
   const debouncedQuery = useDebounce(searchQuery, 500);
 
   const { data: users, isLoading, isError, error } = useUsersQuery(debouncedQuery, accessToken);

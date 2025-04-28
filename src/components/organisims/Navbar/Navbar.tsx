@@ -13,7 +13,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center bg-primary shadow-lg w-full p-4 transition-all">
+    <div className="flex justify-between items-center bg-primary dark:bg-primary-dark shadow-lg w-full p-4 transition-all">
       <Link to="/dashboard">
         <h2 className="text-white text-xl select-none">User Management</h2>
       </Link>

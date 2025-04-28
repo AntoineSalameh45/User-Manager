@@ -1,4 +1,4 @@
-import { iSearchUserProps } from "./SearchUser.type";
+import { iSearchUserProps } from ".";
 
 const SearchUser = ({ onSearch }: iSearchUserProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,7 +10,7 @@ const SearchUser = ({ onSearch }: iSearchUserProps) => {
       <input
         type="text"
         placeholder="Search users..."
-        className="px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary text-txt"
+        className="px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary text-txt dark:text-txt-dark"
         onChange={handleChange}
       />
     </div>

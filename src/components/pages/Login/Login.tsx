@@ -62,7 +62,7 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-pagebg">
-      <div className="bg-bg text-txt shadow-lg rounded-lg p-8 w-96">
+      <div className="bg-cardbg text-txt shadow-lg rounded-lg p-8 w-96">
         <h1 className="text-3xl font-bold text-center mt-10">Login</h1>
         <form
           className="flex flex-col items-center mt-10 space-y-6"

@@ -5,7 +5,7 @@ const SharedLayout = () => {
   return (
     <div className="flex flex-col h-screen">
       <Navbar />
-      <div className="flex-grow p-4 bg-[var(--color-pagebg)] overflow-auto">
+      <div className="flex-grow p-4 bg-pagebg dark:bg-pagebg-dark overflow-auto">
         <Outlet />
       </div>
     </div>
