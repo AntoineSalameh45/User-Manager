@@ -13,3 +13,13 @@ export interface iUserFormFieldsProps {
   register: UseFormRegister<iUserFormValues>;
   errors: FieldErrors<iUserFormValues>;
 }
+
+export interface iUserApiResponse {
+  result: {
+    data: {
+      user: iUserFormValues;
+    };
+  };
+  message: string;
+  status: number;
+}

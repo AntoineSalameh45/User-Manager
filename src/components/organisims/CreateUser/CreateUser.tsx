@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { InputField } from "../../atoms/InputField";
 import { UserStatus } from "../../../../mock/mock.type";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import useSessionStore from "../../../store/authStore";
 import toast from "react-hot-toast";
+import { UserFormFields } from "../../molecules/UserFormFields";
 
 const userSchema = z.object({
   firstName: z.string().nonempty("First Name is required"),
@@ -53,10 +53,9 @@ const CreateUser = () => {
     onSuccess: () => {
       toast.success("User created successfully!");
 
-      // Delay navigation to dashboard for a short time after showing the toast
       setTimeout(() => {
         navigate("/dashboard");
-      }, 2000); // Navigate after 2 seconds
+      }, 2000);
     },
     onError: (error: Error) => {
       toast.error(error.message || "Something went wrong");
@@ -68,60 +67,17 @@ const CreateUser = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-pagebg mt-3">
-      <div className="bg-bg text-txt shadow-lg rounded-lg p-8 w-96">
+    <div className="flex flex-col items-center justify-center min-h-screen mt-3">
+      <div className="bg-cardbg dark:bg-cardbg-dark text-txt dark:text-txt-dark shadow-lg rounded-lg p-8 w-96">
         <h1 className="text-3xl font-bold text-center mt-10">Create User</h1>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-center mt-10 space-y-6"
         >
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="First Name"
-              name="firstName"
-              register={register}
-              error={errors.firstName?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Last Name (optional)"
-              name="lastName"
-              register={register}
-              error={errors.lastName?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Email"
-              name="email"
-              register={register}
-              error={errors.email?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <InputField<UserFormValues>
-              label="Date of Birth"
-              name="dateOfBirth"
-              type="date"
-              register={register}
-              error={errors.dateOfBirth?.message}
-            />
-          </div>
-          <div className="flex flex-col w-80">
-            <label className="text-sm font-medium mb-1">Status</label>
-            <select
-              {...register("status")}
-              className="border bg-pagebg border-gray-300 p-2 rounded focus:outline-primary"
-            >
-              <option value={UserStatus.ACTIVE}>Active</option>
-              <option value={UserStatus.LOCKED}>Locked</option>
-            </select>
-            {errors.status && <p className="text-sm text-red-500">{errors.status.message}</p>}
-          </div>
+          <UserFormFields register={register} errors={errors} />
           <button
             type="submit"
-            className="w-auto py-2 px-4 bg-btn text-insidetxt rounded"
+            className="w-auto py-2 px-4 bg-btn dark:bg-pagebg-dark66 text-insidetxt rounded cursor-pointer transition-all duration-300 border border-transparent dark:hover:border-white hover:bg-primary-dark"
             disabled={mutation.status === "pending"}
           >
             {mutation.status === "pending" ? "Submitting..." : "Submit"}
